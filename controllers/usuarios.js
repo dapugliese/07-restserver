@@ -69,6 +69,7 @@ const Usuario = require('../models/usuario');
 
     const { id } = req.params;
 
+       
     //Eliminación física
     //const usuario = await Usuario.findByIdAndDelete( id );
 
