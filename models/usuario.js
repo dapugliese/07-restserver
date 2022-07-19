@@ -5,7 +5,7 @@ const UsuarioSchema = Schema({
     
     uid: {
         type: String,
-        required: [true, 'El UID es obligatorio'],
+        //required: [true, 'El UID es obligatorio'],
         unique: true
     
     },
@@ -36,7 +36,8 @@ const UsuarioSchema = Schema({
     rol: {
         type: String,
         required: true,
-        emun: ['ADMIN_ROLE', ' USER_ROLE']
+        //default: 'USER_ROLE'
+        emun: ['ADMIN_ROLE', 'USER_ROLE']
 
     },
 
