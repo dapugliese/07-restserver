@@ -32,11 +32,11 @@ router.post('/', [
 router.get('/', obtenerProductos);
 
 
-// Obtener una categoria por id- publico
+// Obtener una producto por id- publico
 router.get('/:id', [
     jsonParser,
     check('id', 'No es un ID de Mongo válido').isMongoId(),
-    check('id').custom( existeProducto ),
+    //check('id').custom( existeProducto ),
     validarCampos
 ], obtenerProductoId );
 
@@ -53,13 +53,13 @@ router.put('/:id', [
 ], actualizarProducto);
 
 
-// borrar una categoria  - solo ADMIN - Marcar inactivo
+// borrarun producto  - solo ADMIN - Marcar inactivo
 router.delete('/:id', [
     jsonParser,
     validarJWT,
     esAdminRole,
     check('id', 'No es un ID de Mongo válido').isMongoId(),
-    check('id').custom( existeProducto ),
+   // check('id').custom( existeProducto ),
     validarCampos
     
 ], borrarProducto);

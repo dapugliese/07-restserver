@@ -30,7 +30,7 @@ router.get('/', obtenerCategorias);
 router.get('/:id', [
     jsonParser,
     check('id', 'No es un ID de Mongo válido').isMongoId(),
-    check('id').custom( existeCategoria ),
+  //  check('id').custom( existeCategoria ),
     validarCampos
 ], obtenerCategoriaId );
 
