@@ -2,7 +2,7 @@ const { Router } = require('express');
 const {check} = require('express-validator');
 
 const bodyParser = require('body-parser');
-const { usuariosGet, usuariosPatch, usuariosPut, usuariosDelete, usuariosPost } = require('../controllers/usuarios');
+const { usuariosGet, usuariosPatch, usuariosPut, usuariosDelete, usuariosPost, obtenerUsuarioId } = require('../controllers/usuarios');
 const { esRoleValido, emailExiste, existeUsuarioPorId } = require('../librerias/db-validators');
 
 // const { validarCampos } = require('../middlewares/validar-campos');
@@ -17,6 +17,14 @@ const jsonParser = bodyParser.json();
 
 
     router.get('/',  usuariosGet);
+
+    // Obtener Usuario por id- publico
+    router.get('/:id', [
+        jsonParser,
+        check('id', 'No es un ID de Mongo válido').isMongoId(),
+    //  check('id').custom( existeCategoria ),
+        validarCampos
+    ], obtenerUsuarioId );
 
     router.put('/:id', [
         jsonParser,

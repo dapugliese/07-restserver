@@ -18,10 +18,10 @@
 
     if ( esMongoId ){
         const usuario = await Usuario.findById( termino );
-        res.json({
+        return res.json({
             results: ( usuario ) ? [ usuario ] : []
         });
-        return
+        
     }
 
     
@@ -47,11 +47,11 @@
 
     if ( esMongoId ){
         const categoria = await Categoria.findById( termino );
-        res.json({
+        return res.json({
             results: ( categoria ) ? [ categoria ] : []
 
         });
-        return
+        
     }
 
     const regex = new RegExp( termino, 'i' );
@@ -76,10 +76,10 @@
     if ( esMongoId ){
         const producto = await Producto.findById( termino )
                         .populate('categoria','nombre');
-        res.json({
+        return res.json({
             results: ( producto ) ? [ producto ] : []
         });
-        return
+        
     }
 
     

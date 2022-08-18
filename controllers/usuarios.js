@@ -5,25 +5,9 @@ const bcryptjs = require('bcryptjs');
 
 const Usuario = require('../models/usuario');
 
- const usuariosGet = async(req = request, res = response) => {
-  
-  //  const {q, nombre='No enviado', apikey, page=1, limit} = req.query;
-    const {limite = 5, desde = 0 } = req.query;
-    const query = {estado: true}
-    
-    const [total, usuarios] = await Promise.all([
-      Usuario.countDocuments(query),
-      Usuario.find(query)
-        .limit(Number(limite))
-        .skip(Number(desde))
-    ])
 
-    res.json({
-        total,
-        usuarios
-    });
-  }
 
+// Crear Usuarios
   const usuariosPost =  async(req, res = response) => {
 
     const { nombre, correo, password, rol } = req.body;
@@ -45,6 +29,41 @@ const Usuario = require('../models/usuario');
     });
   }
 
+
+    //Obtener usuarios
+    const usuariosGet = async(req = request, res = response) => {
+  
+      //  const {q, nombre='No enviado', apikey, page=1, limit} = req.query;
+        const {limite = 5, desde = 0 } = req.query;
+        const query = {estado: true}
+        
+        const [total, usuarios] = await Promise.all([
+          Usuario.countDocuments(query),
+          Usuario.find(query)
+            .limit(Number(limite))
+            .skip(Number(desde))
+        ])
+    
+        res.json({
+            total,
+            usuarios
+        });
+      }
+
+  //Obtener usuarios por Id
+  const obtenerUsuarioId = async(req = request, res = response) => {
+  
+      const { id } = req.params;
+
+      const usuario = await Usuario.findById( id );
+  
+      res.json({
+         usuario
+      });
+    }
+
+  //Actualizar Usuarios
+
   const usuariosPut = async(req, res = response) => {
 
     const { id } = req.params;
@@ -64,6 +83,9 @@ const Usuario = require('../models/usuario');
     
     res.json(usuario);
   }
+
+
+
 
   const usuariosDelete = async(req, res = response) => {
 
@@ -91,6 +113,7 @@ const Usuario = require('../models/usuario');
   }
 module.exports = {
     usuariosGet,
+    obtenerUsuarioId,
     usuariosPost,
     usuariosPut,
     usuariosPatch,
